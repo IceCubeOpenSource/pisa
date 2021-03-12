@@ -100,14 +100,14 @@ class ContainerSet(object):
             logging.warning("Skipping containers %s in linking, as those are not present"%(set(names) - set(self.names)))
 
         containers = [self.__getitem__(name) for name in link_names]
-        logging.debug('Linking containers %s into %s'%(link_names, key))
+        logging.trace('Linking containers %s into %s'%(link_names, key))
         new_container = VirtualContainer(key, containers)
         self.linked_containers.append(new_container)
 
 
     def unlink_containers(self):
         """Unlink all container"""
-        logging.debug('Unlinking all containers')
+        logging.trace('Unlinking all containers')
         for c in self.linked_containers:
             c.unlink()
         self.linked_containers = []
@@ -601,7 +601,7 @@ class Container():
         right now, CPU-only
         """
         # TODO: make work for n-dim
-        logging.debug('Transforming %s array to binned data'%(key))
+        logging.trace('Transforming %s array to binned data'%(key))
         
         
         self.representation = src_representation
@@ -615,7 +615,7 @@ class Container():
     def binned_to_array(self, key, src_representation, dest_representation):
         """Augmented binned data to array data"""
 
-        logging.debug('Transforming %s binned to array data'%(key))
+        logging.trace('Transforming %s binned to array data'%(key))
         
         self.representation = src_representation
         weights = self[key]
